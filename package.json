@@ -1,0 +1,48 @@
+{
+  "name": "salesforce-updater-gcp",
+  "version": "1.0.0",
+  "description": "JavaScript modules for updating Salesforce records with Google Cloud integration",
+  "main": "main-example.js",
+  "scripts": {
+    "start": "node main-example.js",
+    "test": "jest",
+    "deploy": "gcloud functions deploy salesforce-updater --runtime nodejs18 --trigger-http --allow-unauthenticated",
+    "deploy-secure": "gcloud functions deploy salesforce-updater --runtime nodejs18 --trigger-http",
+    "local": "functions-framework --target=salesforceUpdateHandler --port=8080"
+  },
+  "keywords": [
+    "salesforce",
+    "google-cloud",
+    "api",
+    "bulk-update",
+    "csv-export",
+    "oauth"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "@google-cloud/functions-framework": "^3.5.1",
+    "@google-cloud/secret-manager": "^5.6.0",
+    "@google-cloud/storage": "^7.17.0",
+    "axios": "^1.11.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.4",
+    "jest": "^29.7.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "your-git-repo-url"
+  },
+  "files": [
+    "salesforce-auth.js",
+    "salesforce-updater.js",
+    "csv-exporter.js",
+    "main-example.js",
+    "cloud-function.js",
+    "README.md"
+  ]
+}

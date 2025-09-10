@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+package-lock.json
+
+# Environment variables
+.env
+.env.local
+.env.production
+
+# Exports and logs
+exports/
+logs/
+temp/
+*.log
+
+# Google Cloud
+.gcloudignore
+service-account-key.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
