@@ -1,0 +1,14 @@
+{
+  "name": "salesforce-updater-cloud-function",
+  "version": "1.0.0",
+  "main": "cloud-function.js",
+  "dependencies": {
+    "@google-cloud/functions-framework": "^3.5.1",
+    "@google-cloud/secret-manager": "^5.6.0",
+    "@google-cloud/storage": "^7.17.0",
+    "axios": "^1.11.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
