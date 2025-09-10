@@ -1,29 +1,31 @@
-# Dependencies
-node_modules/
-npm-debug.log*
-package-lock.json
-
-# Environment variables
+# Environment variables (NEVER commit these!)
 .env
 .env.local
 .env.production
+.env.staging
 
-# Exports and logs
+# Other sensitive files
+**/secrets/
+service-account-key.json
+*.pem
+*.key
+
+# Dependencies
+node_modules/
+npm-debug.log*
+
+# Exports and logs  
 exports/
 logs/
 temp/
 *.log
 
-# Google Cloud
-.gcloudignore
-service-account-key.json
-
-# IDE
+# IDE files
 .vscode/
 .idea/
 *.swp
-*.swo
 
-# OS
+# OS files
 .DS_Store
 Thumbs.db
+.env
