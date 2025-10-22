@@ -1,7 +1,7 @@
 // cloud-function.js - Google Cloud Function implementation
 const functions = require("@google-cloud/functions-framework");
 const { Storage } = require("@google-cloud/storage");
-const SalesforceUpdateOrchestrator = require("../src/main-example");
+const SalesforceUpdateOrchestrator = require("../main-example");
 const path = require("path");
 const fs = require("fs").promises;
 
@@ -73,7 +73,9 @@ functions.http("salesforceUpdateHandler", async (req, res) => {
         username: process.env.SF_USERNAME,
         password: process.env.SF_PASSWORD,
         securityToken: process.env.SF_SECURITY_TOKEN,
-        loginUrl: process.env.SF_LOGIN_URL || "https://login.salesforce.com",
+        loginUrl:
+          process.env.SF_LOGIN_URL ||
+          "https://realitybasedgroup.my.salesforce.com",
       };
     }
 

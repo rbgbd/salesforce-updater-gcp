@@ -7,6 +7,7 @@
 # Other sensitive files
 **/secrets/
 service-account-key.json
+/keys/salesforce-private.key
 *.pem
 *.key
 
@@ -26,6 +27,6 @@ temp/
 *.swp
 
 # OS files
-.DS_Store
+.DS_Storef
 Thumbs.db
 .env

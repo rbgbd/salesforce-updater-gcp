@@ -1,0 +1,149 @@
+GET https://realitybasedgroup.my.salesforce.com/services/oauth2/authorize?response_type=code&client_id=3MVG9y6x0357HledjtvBcMPduZvmykmiBYbnb_Wzo.hkqSMpWlYN1meVPwZ0PVuRUgiPNbfyb6pSv01YElJUm&redirect_uri=http://localhost:3000/oauth/callback&scope=full%20refresh_token: {
+  "Network": {
+    "addresses": {
+      "local": {
+        "address": "192.168.0.83",
+        "family": "IPv4",
+        "port": 64219
+      },
+      "remote": {
+        "address": "34.226.36.51",
+        "family": "IPv4",
+        "port": 443
+      }
+    },
+    "tls": {
+      "reused": false,
+      "authorized": true,
+      "authorizationError": null,
+      "cipher": {
+        "name": "TLS_AES_256_GCM_SHA384",
+        "standardName": "TLS_AES_256_GCM_SHA384",
+        "version": "TLSv1/SSLv3"
+      },
+      "protocol": "TLSv1.3",
+      "ephemeralKeyInfo": {},
+      "peerCertificate": {
+        "subject": {
+          "country": "US",
+          "stateOrProvince": "California",
+          "locality": "San Francisco",
+          "organization": "Salesforce, Inc.",
+          "commonName": "sfdc-yfeipo.edge.my.salesforce.com",
+          "alternativeNames": "DNS:sfdc-yfeipo.edge.my.salesforce.com, DNS:*.my.salesforce.com, DNS:*.sandbox.my.salesforce.com"
+        },
+        "issuer": {
+          "country": "US",
+          "organization": "DigiCert Inc",
+          "commonName": "DigiCert TLS RSA SHA256 2020 CA1"
+        },
+        "validFrom": "Apr 11 00:00:00 2025 GMT",
+        "validTo": "Apr 10 23:59:59 2026 GMT",
+        "fingerprint": "DF:77:35:F3:6C:D1:02:E9:C5:E9:2C:41:C6:F4:D5:12:42:34:A5:04",
+        "serialNumber": "0fb85c67ab7add5635f197a4c1034867"
+      }
+    }
+  },
+  "Request Headers": {
+    "sforce-call-options": "client=postman",
+    "user-agent": "PostmanRuntime/7.46.1",
+    "accept": "*/*",
+    "postman-token": "cd4ad376-520a-424e-b2ea-093a2ed8740c",
+    "host": "realitybasedgroup.my.salesforce.com",
+    "accept-encoding": "gzip, deflate, br",
+    "connection": "keep-alive",
+    "cookie": "BrowserId=WTQ_G4UcEfCraQ_H8aQ-xg; CookieConsentPolicy=0:1; LSKey-c$CookieConsentPolicy=0:1"
+  },
+  "Response Headers": {
+    "date": "Wed, 17 Sep 2025 15:26:48 GMT",
+    "content-length": "0",
+    "connection": "keep-alive",
+    "location": "https://realitybasedgroup.my.salesforce.com/setup/secur/RemoteAccessAuthorizationPage.apexp?source=CAAAAZldb3HNMDAwMDAwMDAwMDAwMDAwAAABAOIN4N-LkZ-P-Mv6Z_-7RVXL7sIyeUOGitVXJA9X7v1z38RvKjPhkY4qNoO8Gab7EFnWYB--uoP0NKFk5n0JMENXHXDMdQea6thVFdMApwFPqZBjAO_HOArfvcFOt_XLy7cLiYfBoh2IJ9pr6K4GIxBrxcd_-sBYsTubcB08lujMNtu7yzaHxMCgm0fH7tF0FgWtO_Idy0sDg-Bx2L-Rbi35r2asnedcdK_VM5BT7OY03WNmrzCNHg7LZ1HtupRj7xEg2FOW63QBiSp7KVl3eIATL_MHBan3ZvhFPe-FvMbvc3MqFJv-nQPYcvuQF7GNCq3etlgZpztv_L8G7YZMkKCyAhimWk0qR-bMvrTcd937kJflb2HCWkwXf6ayoSLdn225cpwfqheY0HbRHJNRw9VXZBQvAbZz-Ugn1Xn3bovzl_NvavEmYvNsd3D9ANSUSKT8oef_aZ7QWGvP8cRI31Y7eA_qbzlY0Mfjj2kfKhezJHSKfc_0X9fEBBGO2xqcoi8YZNJTVlIDfp7oucQj0OfwRXldfrFZmi9islMZqzZY9GYjHrWLqtmXhxgJdZ_h4YspampAud0QS5o0Yp_j9REKiLNuMiFTDEQ-bd3QKk8gNkn-Ep_FImiKOvklC5yhTiWNgayDsCvTgoDbL8Zu_BSxLNMBlxfMtkPfZMZsHjYEc927rxE79yR377MNY-QuJQ%3D%3D",
+    "x-robots-tag": "none",
+    "expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+    "x-content-type-options": "nosniff",
+    "cache-control": "no-cache,must-revalidate,max-age=0,no-store,private",
+    "content-security-policy": "upgrade-insecure-requests",
+    "strict-transport-security": "max-age=63072000; includeSubDomains",
+    "server": "sfdcedge",
+    "x-sfdc-request-id": "960f36037123a5bcb6916f2b88cff384",
+    "x-request-id": "960f36037123a5bcb6916f2b88cff384",
+    "x-sfdc-edge-cache": "MISS"
+  }
+}
+GET https://realitybasedgroup.my.salesforce.com/setup/secur/RemoteAccessAuthorizationPage.apexp?source=CAAAAZldb3HNMDAwMDAwMDAwMDAwMDAwAAABAOIN4N-LkZ-P-Mv6Z_-7RVXL7sIyeUOGitVXJA9X7v1z38RvKjPhkY4qNoO8Gab7EFnWYB--uoP0NKFk5n0JMENXHXDMdQea6thVFdMApwFPqZBjAO_HOArfvcFOt_XLy7cLiYfBoh2IJ9pr6K4GIxBrxcd_-sBYsTubcB08lujMNtu7yzaHxMCgm0fH7tF0FgWtO_Idy0sDg-Bx2L-Rbi35r2asnedcdK_VM5BT7OY03WNmrzCNHg7LZ1HtupRj7xEg2FOW63QBiSp7KVl3eIATL_MHBan3ZvhFPe-FvMbvc3MqFJv-nQPYcvuQF7GNCq3etlgZpztv_L8G7YZMkKCyAhimWk0qR-bMvrTcd937kJflb2HCWkwXf6ayoSLdn225cpwfqheY0HbRHJNRw9VXZBQvAbZz-Ugn1Xn3bovzl_NvavEmYvNsd3D9ANSUSKT8oef_aZ7QWGvP8cRI31Y7eA_qbzlY0Mfjj2kfKhezJHSKfc_0X9fEBBGO2xqcoi8YZNJTVlIDfp7oucQj0OfwRXldfrFZmi9islMZqzZY9GYjHrWLqtmXhxgJdZ_h4YspampAud0QS5o0Yp_j9REKiLNuMiFTDEQ-bd3QKk8gNkn-Ep_FImiKOvklC5yhTiWNgayDsCvTgoDbL8Zu_BSxLNMBlxfMtkPfZMZsHjYEc927rxE79yR377MNY-QuJQ%3D%3D: {
+  "Network": {
+    "addresses": {
+      "local": {
+        "address": "192.168.0.83",
+        "family": "IPv4",
+        "port": 64219
+      },
+      "remote": {
+        "address": "34.226.36.51",
+        "family": "IPv4",
+        "port": 443
+      }
+    },
+    "tls": {
+      "reused": false,
+      "authorized": true,
+      "authorizationError": null,
+      "cipher": {
+        "name": "TLS_AES_256_GCM_SHA384",
+        "standardName": "TLS_AES_256_GCM_SHA384",
+        "version": "TLSv1/SSLv3"
+      },
+      "protocol": "TLSv1.3",
+      "ephemeralKeyInfo": {},
+      "peerCertificate": {
+        "subject": {
+          "country": "US",
+          "stateOrProvince": "California",
+          "locality": "San Francisco",
+          "organization": "Salesforce, Inc.",
+          "commonName": "sfdc-yfeipo.edge.my.salesforce.com",
+          "alternativeNames": "DNS:sfdc-yfeipo.edge.my.salesforce.com, DNS:*.my.salesforce.com, DNS:*.sandbox.my.salesforce.com"
+        },
+        "issuer": {
+          "country": "US",
+          "organization": "DigiCert Inc",
+          "commonName": "DigiCert TLS RSA SHA256 2020 CA1"
+        },
+        "validFrom": "Apr 11 00:00:00 2025 GMT",
+        "validTo": "Apr 10 23:59:59 2026 GMT",
+        "fingerprint": "DF:77:35:F3:6C:D1:02:E9:C5:E9:2C:41:C6:F4:D5:12:42:34:A5:04",
+        "serialNumber": "0fb85c67ab7add5635f197a4c1034867"
+      }
+    }
+  },
+  "Request Headers": {
+    "sforce-call-options": "client=postman",
+    "user-agent": "PostmanRuntime/7.46.1",
+    "accept": "*/*",
+    "postman-token": "cd4ad376-520a-424e-b2ea-093a2ed8740c",
+    "accept-encoding": "gzip, deflate, br",
+    "connection": "keep-alive",
+    "cookie": "BrowserId=WTQ_G4UcEfCraQ_H8aQ-xg; CookieConsentPolicy=0:1; LSKey-c$CookieConsentPolicy=0:1",
+    "referer": "https://realitybasedgroup.my.salesforce.com/services/oauth2/authorize?response_type=code&client_id=3MVG9y6x0357HledjtvBcMPduZvmykmiBYbnb_Wzo.hkqSMpWlYN1meVPwZ0PVuRUgiPNbfyb6pSv01YElJUm&redirect_uri=http://localhost:3000/oauth/callback&scope=full%20refresh_token",
+    "host": "realitybasedgroup.my.salesforce.com"
+  },
+  "Response Headers": {
+    "date": "Wed, 17 Sep 2025 15:26:48 GMT",
+    "content-type": "text/html; charset=UTF-8",
+    "transfer-encoding": "chunked",
+    "connection": "keep-alive",
+    "x-robots-tag": "none",
+    "vary": "Accept-Encoding",
+    "x-content-type-options": "nosniff",
+    "content-encoding": "gzip",
+    "strict-transport-security": "max-age=63072000; includeSubDomains",
+    "cache-control": "must-revalidate,no-cache,no-store",
+    "content-security-policy": "upgrade-insecure-requests",
+    "server": "sfdcedge",
+    "x-sfdc-request-id": "154be3c74dd2d7c59552fdae08b5e325",
+    "x-request-id": "154be3c74dd2d7c59552fdae08b5e325",
+    "x-sfdc-edge-cache": "MISS"
+  },
+  "Response Body": "\n\n\r\n<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\n<html>\n<head>\n    <meta HTTP-EQUIV=\"PRAGMA\" CONTENT=\"NO-CACHE\">\n\n\n\n\n\n<script>\nfunction redirectOnLoad() {\nif (this.SfdcApp && this.SfdcApp.projectOneNavigator) { SfdcApp.projectOneNavigator.handleRedirect('https://realitybasedgroup.my.salesforce.com?ec=302&startURL=%2Fsetup%2Fsecur%2FRemoteAccessAuthorizationPage.apexp%3Fsource%3DCAAAAZldb3HNMDAwMDAwMDAwMDAwMDAwAAABAOIN4N-LkZ-P-Mv6Z_-7RVXL7sIyeUOGitVXJA9X7v1z38RvKjPhkY4qNoO8Gab7EFnWYB--uoP0NKFk5n0JMENXHXDMdQea6thVFdMApwFPqZBjAO_HOArfvcFOt_XLy7cLiYfBoh2IJ9pr6K4GIxBrxcd_-sBYsTubcB08lujMNtu7yzaHxMCgm0fH7tF0FgWtO_Idy0sDg-Bx2L-Rbi35r2asnedcdK_VM5BT7OY03WNmrzCNHg7LZ1HtupRj7xEg2FOW63QBiSp7KVl3eIATL_MHBan3ZvhFPe-FvMbvc3MqFJv-nQPYcvuQF7GNCq3etlgZpztv_L8G7YZMkKCyAhimWk0qR-bMvrTcd937kJflb2HCWkwXf6ayoSLdn225cpwfqheY0HbRHJNRw9VXZBQvAbZz-Ugn1Xn3bovzl_NvavEmYvNsd3D9ANSUSKT8oef_aZ7QWGvP8cRI31Y7eA_qbzlY0Mfjj2kfKhezJHSKfc_0X9fEBBGO2xqcoi8YZNJTVlIDfp7oucQj0OfwRXldfrFZmi9islMZqzZY9GYjHrWLqtmXhxgJdZ_h4YspampAud0QS5o0Yp_j9REKiLNuMiFTDEQ-bd3QKk8gNkn-Ep_FImiKOvklC5yhTiWNgayDsCvTgoDbL8Zu_BSxLNMBlxfMtkPfZMZsHjYEc927rxE79yR377MNY-QuJQ%253D%253D'); }  else \nif (window.location.replace){ \nwindow.location.replace('https://realitybasedgroup.my.salesforce.com?ec=302&startURL=%2Fsetup%2Fsecur%2FRemoteAccessAuthorizationPage.apexp%3Fsource%3DCAAAAZldb3HNMDAwMDAwMDAwMDAwMDAwAAABAOIN4N-LkZ-P-Mv6Z_-7RVXL7sIyeUOGitVXJA9X7v1z38RvKjPhkY4qNoO8Gab7EFnWYB--uoP0NKFk5n0JMENXHXDMdQea6thVFdMApwFPqZBjAO_HOArfvcFOt_XLy7cLiYfBoh2IJ9pr6K4GIxBrxcd_-sBYsTubcB08lujMNtu7yzaHxMCgm0fH7tF0FgWtO_Idy0sDg-Bx2L-Rbi35r2asnedcdK_VM5BT7OY03WNmrzCNHg7LZ1HtupRj7xEg2FOW63QBiSp7KVl3eIATL_MHBan3ZvhFPe-FvMbvc3MqFJv-nQPYcvuQF7GNCq3etlgZpztv_L8G7YZMkKCyAhimWk0qR-bMvrTcd937kJflb2HCWkwXf6ayoSLdn225cpwfqheY0HbRHJNRw9VXZBQvAbZz-Ugn1Xn3bovzl_NvavEmYvNsd3D9ANSUSKT8oef_aZ7QWGvP8cRI31Y7eA_qbzlY0Mfjj2kfKhezJHSKfc_0X9fEBBGO2xqcoi8YZNJTVlIDfp7oucQj0OfwRXldfrFZmi9islMZqzZY9GYjHrWLqtmXhxgJdZ_h4YspampAud0QS5o0Yp_j9REKiLNuMiFTDEQ-bd3QKk8gNkn-Ep_FImiKOvklC5yhTiWNgayDsCvTgoDbL8Zu_BSxLNMBlxfMtkPfZMZsHjYEc927rxE79yR377MNY-QuJQ%253D%253D');\n} else {\nwindow.location.href ='https://realitybasedgroup.my.salesforce.com?ec=302&startURL=%2Fsetup%2Fsecur%2FRemoteAccessAuthorizationPage.apexp%3Fsource%3DCAAAAZldb3HNMDAwMDAwMDAwMDAwMDAwAAABAOIN4N-LkZ-P-Mv6Z_-7RVXL7sIyeUOGitVXJA9X7v1z38RvKjPhkY4qNoO8Gab7EFnWYB--uoP0NKFk5n0JMENXHXDMdQea6thVFdMApwFPqZBjAO_HOArfvcFOt_XLy7cLiYfBoh2IJ9pr6K4GIxBrxcd_-sBYsTubcB08lujMNtu7yzaHxMCgm0fH7tF0FgWtO_Idy0sDg-Bx2L-Rbi35r2asnedcdK_VM5BT7OY03WNmrzCNHg7LZ1HtupRj7xEg2FOW63QBiSp7KVl3eIATL_MHBan3ZvhFPe-FvMbvc3MqFJv-nQPYcvuQF7GNCq3etlgZpztv_L8G7YZMkKCyAhimWk0qR-bMvrTcd937kJflb2HCWkwXf6ayoSLdn225cpwfqheY0HbRHJNRw9VXZBQvAbZz-Ugn1Xn3bovzl_NvavEmYvNsd3D9ANSUSKT8oef_aZ7QWGvP8cRI31Y7eA_qbzlY0Mfjj2kfKhezJHSKfc_0X9fEBBGO2xqcoi8YZNJTVlIDfp7oucQj0OfwRXldfrFZmi9islMZqzZY9GYjHrWLqtmXhxgJdZ_h4YspampAud0QS5o0Yp_j9REKiLNuMiFTDEQ-bd3QKk8gNkn-Ep_FImiKOvklC5yhTiWNgayDsCvTgoDbL8Zu_BSxLNMBlxfMtkPfZMZsHjYEc927rxE79yR377MNY-QuJQ%253D%253D';\n} \n} \nredirectOnLoad();\n</script>\n\n</head>\n\n\n</html>\n\n\n\n\n\n<!-- Body events -->\n<script type=\"text/javascript\">function bodyOnLoad(){if(window.PreferenceBits){window.PreferenceBits.prototype.csrfToken=\"null\";};}function bodyOnBeforeUnload(){}function bodyOnFocus(){}function bodyOnUnload(){}</script>\n\t\t\t\n</body>\n</html>\n\n\n<!--\n...................................................................................................\n...................................................................................................\n...................................................................................................\n...................................................................................................\n-->\n"
+}

@@ -2,9 +2,9 @@
   "name": "salesforce-updater-gcp",
   "version": "1.0.0",
   "description": "JavaScript modules for updating Salesforce records with Google Cloud integration",
-  "main": "src/main-example.js",
+  "main": "main-example.js",
   "scripts": {
-    "start": "node src/main-example.js",
+    "start": "node main-example.js",
     "test": "jest",
     "deploy": "gcloud functions deploy salesforce-updater --source ./cloud --runtime nodejs18 --trigger-http --allow-unauthenticated",
     "deploy-secure": "gcloud functions deploy salesforce-updater --source ./cloud --runtime nodejs18 --trigger-http",
@@ -24,7 +24,10 @@
     "@google-cloud/functions-framework": "^3.5.1",
     "@google-cloud/secret-manager": "^5.6.0",
     "@google-cloud/storage": "^7.17.0",
-    "axios": "^1.11.0"
+    "axios": "^1.11.0",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2"
   },
   "devDependencies": {
     "@types/node": "^20.10.4",
