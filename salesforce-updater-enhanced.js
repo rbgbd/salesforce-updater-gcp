@@ -21,10 +21,10 @@ class SalesforceUpdater {
       await this.auth.ensureAuthenticated();
 
       const queryUrl = `${this.auth.instanceUrl}/services/data/${this.apiVersion}/query`;
-
+      
       const response = await axios.get(queryUrl, {
         headers: this.auth.getAuthHeaders(),
-        params: { q: soqlQuery },
+        params: { q: soqlQuery }
       });
 
       console.log(`📊 Query returned ${response.data.totalSize} records`);
@@ -44,24 +44,21 @@ class SalesforceUpdater {
     try {
       // Escape single quotes in the work order number for SOQL
       const escapedNumber = workOrderNumber.replace(/'/g, "\\'");
-
+      
       const soql = `SELECT Id, Name, Work_Order_Number__c FROM Work_Orders__c WHERE Work_Order_Number__c = '${escapedNumber}' LIMIT 1`;
-
+      
       console.log(`🔍 Looking up Work Order: ${workOrderNumber}`);
       const results = await this.query(soql);
-
+      
       if (results.length === 0) {
         console.log(`⚠️  Work Order not found: ${workOrderNumber}`);
         return null;
       }
-
+      
       console.log(`✅ Found Work Order: ${results[0].Id} (${results[0].Name})`);
       return results[0];
     } catch (error) {
-      console.error(
-        `❌ Failed to lookup Work Order ${workOrderNumber}:`,
-        error.message
-      );
+      console.error(`❌ Failed to lookup Work Order ${workOrderNumber}:`, error.message);
       throw error;
     }
   }
@@ -77,7 +74,7 @@ class SalesforceUpdater {
     try {
       // First, look up the Work Order
       const workOrder = await this.lookupWorkOrderByNumber(workOrderNumber);
-
+      
       if (!workOrder) {
         const failureResult = {
           success: false,
@@ -90,11 +87,11 @@ class SalesforceUpdater {
           error: "Work Order not found",
           status: "NOT_FOUND",
         };
-
+        
         this.failedUpdates.push(failureResult);
         return failureResult;
       }
-
+      
       // Now update the record using the found ID
       return await this.updateRecord(
         "Work_Orders__c",
@@ -114,12 +111,9 @@ class SalesforceUpdater {
         error: error.response?.data || error.message,
         status: error.response?.status || "ERROR",
       };
-
+      
       this.failedUpdates.push(failureResult);
-      console.error(
-        `❌ Failed to update Work Order ${workOrderNumber}:`,
-        error.message
-      );
+      console.error(`❌ Failed to update Work Order ${workOrderNumber}:`, error.message);
       return failureResult;
     }
   }
