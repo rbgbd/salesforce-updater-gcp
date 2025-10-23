@@ -1,13 +1,13 @@
 // salesforce-updater.js
-const axios = require('axios');
-const SalesforceAuth = require('./salesforce-auth');
+const axios = require("axios");
+const SalesforceAuthJWT = require("./salesforce-auth-jwt");
 
 class SalesforceUpdater {
   constructor(authConfig) {
     this.auth = new SalesforceAuth(authConfig);
     this.successfulUpdates = [];
     this.failedUpdates = [];
-    this.apiVersion = 'v58.0';
+    this.apiVersion = "v58.0";
   }
 
   /**
@@ -15,8 +15,15 @@ class SalesforceUpdater {
    * @returns {Promise<void>}
    */
   async initialize() {
-    await this.auth.authenticate();
-    console.log('🚀 Salesforce Updater initialized successfully');
+    const auth = new SalesforceAuthJWT({
+      clientId: process.env.SF_CLIENT_ID,
+      username: process.env.SF_USERNAME,
+      privateKeyPath: process.env.SF_PRIVATE_KEY_PATH,
+      loginUrl: process.env.SF_LOGIN_URL,
+    });
+
+    await auth.authenticate();
+    console.log("🚀 Salesforce Updater initialized successfully");
   }
 
   /**
@@ -30,11 +37,11 @@ class SalesforceUpdater {
   async updateRecord(objectType, recordId, updateData, metadata = {}) {
     try {
       await this.auth.ensureAuthenticated();
-      
+
       const updateUrl = `${this.auth.instanceUrl}/services/data/${this.apiVersion}/sobjects/${objectType}/${recordId}`;
-      
+
       const response = await axios.patch(updateUrl, updateData, {
-        headers: this.auth.getAuthHeaders()
+        headers: this.auth.getAuthHeaders(),
       });
 
       const result = {
@@ -44,14 +51,13 @@ class SalesforceUpdater {
         updateData,
         metadata,
         timestamp: new Date().toISOString(),
-        status: response.status
+        status: response.status,
       };
 
       this.successfulUpdates.push(result);
       console.log(`✅ Updated ${objectType} record: ${recordId}`);
-      
-      return result;
 
+      return result;
     } catch (error) {
       const failureResult = {
         success: false,
@@ -61,12 +67,15 @@ class SalesforceUpdater {
         metadata,
         timestamp: new Date().toISOString(),
         error: error.response?.data || error.message,
-        status: error.response?.status || 'UNKNOWN'
+        status: error.response?.status || "UNKNOWN",
       };
 
       this.failedUpdates.push(failureResult);
-      console.error(`❌ Failed to update ${objectType} record ${recordId}:`, error.response?.data || error.message);
-      
+      console.error(
+        `❌ Failed to update ${objectType} record ${recordId}:`,
+        error.response?.data || error.message
+      );
+
       return failureResult;
     }
   }
@@ -82,9 +91,11 @@ class SalesforceUpdater {
    */
   async processUpdates(updateList, options = {}) {
     const { batchSize = 5, delayMs = 100 } = options;
-    
-    console.log(`🔄 Processing ${updateList.length} record updates in batches of ${batchSize}`);
-    
+
+    console.log(
+      `🔄 Processing ${updateList.length} record updates in batches of ${batchSize}`
+    );
+
     // Reset tracking arrays
     this.successfulUpdates = [];
     this.failedUpdates = [];
@@ -94,11 +105,13 @@ class SalesforceUpdater {
       const batch = updateList.slice(i, i + batchSize);
       const batchNumber = Math.floor(i / batchSize) + 1;
       const totalBatches = Math.ceil(updateList.length / batchSize);
-      
-      console.log(`📦 Processing batch ${batchNumber}/${totalBatches} (${batch.length} records)`);
-      
+
+      console.log(
+        `📦 Processing batch ${batchNumber}/${totalBatches} (${batch.length} records)`
+      );
+
       // Process batch concurrently
-      const batchPromises = batch.map(update => 
+      const batchPromises = batch.map((update) =>
         this.updateRecord(
           update.objectType,
           update.recordId,
@@ -106,9 +119,9 @@ class SalesforceUpdater {
           update.metadata
         )
       );
-      
+
       await Promise.all(batchPromises);
-      
+
       // Add delay between batches to respect rate limits
       if (i + batchSize < updateList.length && delayMs > 0) {
         await this.delay(delayMs);
@@ -121,11 +134,15 @@ class SalesforceUpdater {
       failed: this.failedUpdates.length,
       successfulUpdates: this.successfulUpdates,
       failedUpdates: this.failedUpdates,
-      successRate: ((this.successfulUpdates.length / updateList.length) * 100).toFixed(2) + '%'
+      successRate:
+        ((this.successfulUpdates.length / updateList.length) * 100).toFixed(2) +
+        "%",
     };
 
-    console.log(`🏁 Update processing complete: ${results.successful} successful, ${results.failed} failed (${results.successRate} success rate)`);
-    
+    console.log(
+      `🏁 Update processing complete: ${results.successful} successful, ${results.failed} failed (${results.successRate} success rate)`
+    );
+
     return results;
   }
 
@@ -137,12 +154,14 @@ class SalesforceUpdater {
    * @returns {Promise<Object>} Processing results
    */
   async processKeyValueUpdates(objectType, keyValuePairs, options = {}) {
-    const updateList = Object.entries(keyValuePairs).map(([recordId, updateData]) => ({
-      objectType,
-      recordId,
-      updateData,
-      metadata: { source: 'keyValuePairs' }
-    }));
+    const updateList = Object.entries(keyValuePairs).map(
+      ([recordId, updateData]) => ({
+        objectType,
+        recordId,
+        updateData,
+        metadata: { source: "keyValuePairs" },
+      })
+    );
 
     return await this.processUpdates(updateList, options);
   }
@@ -156,14 +175,22 @@ class SalesforceUpdater {
       totalProcessed: this.successfulUpdates.length + this.failedUpdates.length,
       successful: this.successfulUpdates.length,
       failed: this.failedUpdates.length,
-      successRate: this.successfulUpdates.length > 0 || this.failedUpdates.length > 0 
-        ? ((this.successfulUpdates.length / (this.successfulUpdates.length + this.failedUpdates.length)) * 100).toFixed(2) + '%'
-        : '0%',
-      lastProcessed: this.successfulUpdates.length > 0 || this.failedUpdates.length > 0
-        ? Math.max(
-            ...[...this.successfulUpdates, ...this.failedUpdates].map(u => new Date(u.timestamp))
-          )
-        : null
+      successRate:
+        this.successfulUpdates.length > 0 || this.failedUpdates.length > 0
+          ? (
+              (this.successfulUpdates.length /
+                (this.successfulUpdates.length + this.failedUpdates.length)) *
+              100
+            ).toFixed(2) + "%"
+          : "0%",
+      lastProcessed:
+        this.successfulUpdates.length > 0 || this.failedUpdates.length > 0
+          ? Math.max(
+              ...[...this.successfulUpdates, ...this.failedUpdates].map(
+                (u) => new Date(u.timestamp)
+              )
+            )
+          : null,
     };
   }
 
@@ -173,7 +200,7 @@ class SalesforceUpdater {
   clearHistory() {
     this.successfulUpdates = [];
     this.failedUpdates = [];
-    console.log('📝 Update history cleared');
+    console.log("📝 Update history cleared");
   }
 
   /**
@@ -182,7 +209,7 @@ class SalesforceUpdater {
    * @returns {Promise<void>}
    */
   delay(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 }
 
