@@ -36,8 +36,8 @@ class SalesforceUpdater {
   }
 
   /**
-   * Look up a Work Order by Work Order Number
-   * @param {string} workOrderNumber - The Work Order Number field value
+   * Look up a Work Order by Work Order Number (Name field)
+   * @param {string} workOrderNumber - The Work Order Number field value (stored in Name field)
    * @returns {Promise<Object|null>} Work Order record or null if not found
    */
   async lookupWorkOrderByNumber(workOrderNumber) {
@@ -45,7 +45,7 @@ class SalesforceUpdater {
       // Escape single quotes in the work order number for SOQL
       const escapedNumber = workOrderNumber.replace(/'/g, "\\'");
 
-      const soql = `SELECT Id, Name, Work_Order_Number__c FROM Work_Orders__c WHERE Work_Order_Number__c = '${escapedNumber}' LIMIT 1`;
+      const soql = `SELECT Id, Name FROM Work_Order__c WHERE Name = '${escapedNumber}' LIMIT 1`;
 
       console.log(`🔍 Looking up Work Order: ${workOrderNumber}`);
       const results = await this.query(soql);
@@ -83,7 +83,7 @@ class SalesforceUpdater {
           success: false,
           workOrderNumber,
           recordId: null,
-          objectType: "Work_Orders__c",
+          objectType: "Work_Order__c",
           updateData,
           metadata,
           timestamp: new Date().toISOString(),
@@ -97,7 +97,7 @@ class SalesforceUpdater {
 
       // Now update the record using the found ID
       return await this.updateRecord(
-        "Work_Orders__c",
+        "Work_Order__c",
         workOrder.Id,
         updateData,
         { ...metadata, workOrderNumber, workOrderName: workOrder.Name }
@@ -107,7 +107,7 @@ class SalesforceUpdater {
         success: false,
         workOrderNumber,
         recordId: null,
-        objectType: "Work_Orders__c",
+        objectType: "Work_Order__c",
         updateData,
         metadata,
         timestamp: new Date().toISOString(),
@@ -126,7 +126,7 @@ class SalesforceUpdater {
 
   /**
    * Update a single Salesforce record by ID
-   * @param {string} objectType - Salesforce object type (e.g., 'Account', 'Work_Orders__c')
+   * @param {string} objectType - Salesforce object type (e.g., 'Account', 'Work_Order__c')
    * @param {string} recordId - Salesforce record ID
    * @param {Object} updateData - Object containing fields to update
    * @param {Object} metadata - Additional metadata to track with the update

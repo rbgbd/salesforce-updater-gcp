@@ -17,7 +17,7 @@ async function testWorkOrderUpdate() {
     const auth = new SalesforceAuthJWT({
       clientId: process.env.SF_CLIENT_ID,
       username: process.env.SF_USERNAME,
-      privateKeyPath: process.env.SF_PRIVATE_KEY_PATH,
+      privateKeyPath: process.env.SF_PRIVATE_KEY_PATH, // Or use privateKey directly
       loginUrl:
         process.env.SF_LOGIN_URL ||
         "https://realitybasedgroup.my.salesforce.com",
@@ -31,7 +31,7 @@ async function testWorkOrderUpdate() {
 
     // 3. Test looking up a Work Order (REPLACE WITH YOUR ACTUAL WORK ORDER NUMBER)
     console.log("\n📝 Step 3: Looking up Work Order...");
-    const testWorkOrderNumber = "a0DE0000008vCesMAE"; // 👈 REPLACE THIS with an actual Work Order Number
+    const testWorkOrderNumber = "2230"; // 👈 REPLACE THIS with an actual Work Order Number
 
     const workOrder = await updater.lookupWorkOrderByNumber(
       testWorkOrderNumber
@@ -50,17 +50,16 @@ async function testWorkOrderUpdate() {
     console.log("\n📋 Work Order Details:");
     console.log(`   ID: ${workOrder.Id}`);
     console.log(`   Name: ${workOrder.Name}`);
-    console.log(`   Work Order Number: ${workOrder.Work_Order_Number__c}`);
 
     // 4. Test updating the Work Order
     console.log("\n📝 Step 4: Updating Work Order...");
 
     // REPLACE THESE FIELDS with the actual fields you want to update
-    // Example fields - adjust based on your Work_Orders__c object schema
+    // Example fields - adjust based on your Work_Order__c object schema
     const updateData = {
-      Status__c: "In Progress", // 👈 Replace with your actual field API names
-      // Description__c: "Updated from Vimeo import",
-      // Last_Updated_From_Vimeo__c: new Date().toISOString(),
+      Video_Link_Vimeo__c: "Updated from Vimeo import",
+      Vimeo_Downloadable_Link__c: "Farts",
+      Date_Delivered__c: new Date().toISOString(),
       // Add more fields as needed
     };
 

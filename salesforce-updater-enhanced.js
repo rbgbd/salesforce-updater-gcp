@@ -1,6 +1,6 @@
 // salesforce-updater-enhanced.js
 const axios = require("axios");
-const SalesforceAuthJWT = require("./salesforce-auth-jwt");
+const SalesforceAuthJWT = require("./cloud/salesforce-auth-jwt");
 
 class SalesforceUpdater {
   constructor(authInstance) {
@@ -21,10 +21,10 @@ class SalesforceUpdater {
       await this.auth.ensureAuthenticated();
 
       const queryUrl = `${this.auth.instanceUrl}/services/data/${this.apiVersion}/query`;
-      
+
       const response = await axios.get(queryUrl, {
         headers: this.auth.getAuthHeaders(),
-        params: { q: soqlQuery }
+        params: { q: soqlQuery },
       });
 
       console.log(`📊 Query returned ${response.data.totalSize} records`);
@@ -36,29 +36,32 @@ class SalesforceUpdater {
   }
 
   /**
-   * Look up a Work Order by Work Order Number
-   * @param {string} workOrderNumber - The Work Order Number field value
+   * Look up a Work Order by Work Order Number (Name field)
+   * @param {string} workOrderNumber - The Work Order Number field value (stored in Name field)
    * @returns {Promise<Object|null>} Work Order record or null if not found
    */
   async lookupWorkOrderByNumber(workOrderNumber) {
     try {
       // Escape single quotes in the work order number for SOQL
       const escapedNumber = workOrderNumber.replace(/'/g, "\\'");
-      
-      const soql = `SELECT Id, Name, Work_Order_Number__c FROM Work_Orders__c WHERE Work_Order_Number__c = '${escapedNumber}' LIMIT 1`;
-      
+
+      const soql = `SELECT Id, Name FROM Work_Order__c WHERE Name = '${escapedNumber}' LIMIT 1`;
+
       console.log(`🔍 Looking up Work Order: ${workOrderNumber}`);
       const results = await this.query(soql);
-      
+
       if (results.length === 0) {
         console.log(`⚠️  Work Order not found: ${workOrderNumber}`);
         return null;
       }
-      
+
       console.log(`✅ Found Work Order: ${results[0].Id} (${results[0].Name})`);
       return results[0];
     } catch (error) {
-      console.error(`❌ Failed to lookup Work Order ${workOrderNumber}:`, error.message);
+      console.error(
+        `❌ Failed to lookup Work Order ${workOrderNumber}:`,
+        error.message
+      );
       throw error;
     }
   }
@@ -74,27 +77,27 @@ class SalesforceUpdater {
     try {
       // First, look up the Work Order
       const workOrder = await this.lookupWorkOrderByNumber(workOrderNumber);
-      
+
       if (!workOrder) {
         const failureResult = {
           success: false,
           workOrderNumber,
           recordId: null,
-          objectType: "Work_Orders__c",
+          objectType: "Work_Order__c",
           updateData,
           metadata,
           timestamp: new Date().toISOString(),
           error: "Work Order not found",
           status: "NOT_FOUND",
         };
-        
+
         this.failedUpdates.push(failureResult);
         return failureResult;
       }
-      
+
       // Now update the record using the found ID
       return await this.updateRecord(
-        "Work_Orders__c",
+        "Work_Order__c",
         workOrder.Id,
         updateData,
         { ...metadata, workOrderNumber, workOrderName: workOrder.Name }
@@ -104,23 +107,26 @@ class SalesforceUpdater {
         success: false,
         workOrderNumber,
         recordId: null,
-        objectType: "Work_Orders__c",
+        objectType: "Work_Order__c",
         updateData,
         metadata,
         timestamp: new Date().toISOString(),
         error: error.response?.data || error.message,
         status: error.response?.status || "ERROR",
       };
-      
+
       this.failedUpdates.push(failureResult);
-      console.error(`❌ Failed to update Work Order ${workOrderNumber}:`, error.message);
+      console.error(
+        `❌ Failed to update Work Order ${workOrderNumber}:`,
+        error.message
+      );
       return failureResult;
     }
   }
 
   /**
    * Update a single Salesforce record by ID
-   * @param {string} objectType - Salesforce object type (e.g., 'Account', 'Work_Orders__c')
+   * @param {string} objectType - Salesforce object type (e.g., 'Account', 'Work_Order__c')
    * @param {string} recordId - Salesforce record ID
    * @param {Object} updateData - Object containing fields to update
    * @param {Object} metadata - Additional metadata to track with the update

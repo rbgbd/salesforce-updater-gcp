@@ -6,6 +6,10 @@
   "scripts": {
     "test": "node test-work-order-update.js",
     "describe": "node describe-work-orders.js",
+    "list": "node list-work-orders.js",
+    "list-objects": "node list-custom-objects.js",
+    "validate": "node validate-vimeo-export.js",
+    "sync": "node vimeo-to-salesforce.js",
     "auth-test": "node cloud/test-jwt-auth.js"
   },
   "dependencies": {

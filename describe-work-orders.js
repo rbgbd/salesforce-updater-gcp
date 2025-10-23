@@ -4,7 +4,7 @@ const SalesforceAuthJWT = require("./cloud/salesforce-auth-jwt");
 const axios = require("axios");
 
 /**
- * Describe the Work_Orders__c object to see available fields
+ * Describe the Work_Order__c object to see available fields
  */
 async function describeWorkOrders() {
   try {
@@ -25,7 +25,7 @@ async function describeWorkOrders() {
     await auth.authenticate();
 
     // Describe the object
-    const describeUrl = `${auth.instanceUrl}/services/data/v58.0/sobjects/Work_Orders__c/describe`;
+    const describeUrl = `${auth.instanceUrl}/services/data/v58.0/sobjects/Work_Order__c/describe`;
 
     console.log("\n📡 Fetching object metadata...\n");
 
@@ -116,7 +116,7 @@ async function describeWorkOrders() {
     console.log("✅ Description complete!");
     console.log("=".repeat(70));
   } catch (error) {
-    console.error("\n❌ Failed to describe Work_Orders__c:");
+    console.error("\n❌ Failed to describe Work_Order__c:");
     console.error(error.message);
 
     if (error.response) {
