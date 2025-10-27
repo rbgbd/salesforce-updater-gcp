@@ -45,7 +45,7 @@ class SalesforceUpdater {
       // Escape single quotes in the work order number for SOQL
       const escapedNumber = workOrderNumber.replace(/'/g, "\\'");
 
-      const soql = `SELECT Id, Name FROM Work_Order__c WHERE Name = '${escapedNumber}' LIMIT 1`;
+      const soql = `SELECT Id, Name, SASSIE_ID__c, Related_Project__r.SASSIE_Survey_ID__c, Related_Project__r.Video_QID__c, Related_Project__r.Download_Video_QID__c  FROM Work_Order__c WHERE Name = '${escapedNumber}' LIMIT 1`;
 
       console.log(`🔍 Looking up Work Order: ${workOrderNumber}`);
       const results = await this.query(soql);
@@ -100,7 +100,16 @@ class SalesforceUpdater {
         "Work_Order__c",
         workOrder.Id,
         updateData,
-        { ...metadata, workOrderNumber, workOrderName: workOrder.Name }
+        {
+          ...metadata,
+          workOrderNumber,
+          workOrderName: workOrder.Name,
+          sassieId: workOrder.SASSIE_ID__c,
+          sassieSurveyName: workOrder.Related_Project__r?.SASSIE_Survey_Name__c,
+          sassieSurveyId: Related_Project__r?.SASSIE_Survey_ID__c,
+          sassieVideoQID: Related_Project__r?.Video_QID__c,
+          sassieDownloadQID: Related_Project__r?.Download_Video_QID__c,
+        }
       );
     } catch (error) {
       const failureResult = {

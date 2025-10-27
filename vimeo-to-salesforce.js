@@ -357,7 +357,7 @@ async function main() {
     // 4. Process Vimeo export
     // REPLACE './vimeo-export.csv' with your actual file path
     const results = await integration.processVimeoExport("./vimeo-export.csv", {
-      workOrderIdentifier: "WO#", // Field in CSV that contains Work Order name
+      workOrderIdentifier: "work_order_name", // Field in CSV that contains Work Order name
       batchSize: 5,
       delayMs: 100,
       dryRun: false, // Set to true to test without making updates
