@@ -1,0 +1,31 @@
+# .env.example - Copy this to .env and fill in your values
+
+# ==================================================
+# SALESFORCE AUTHENTICATION (JWT)
+# ==================================================
+SF_CLIENT_ID=your_salesforce_consumer_key_here
+SF_USERNAME=your.email@realitybasedgroup.com
+SF_LOGIN_URL=https://realitybasedgroup.my.salesforce.com
+SF_PRIVATE_KEY_PATH=./salesforce-private.key
+
+# ==================================================
+# SASSIE API CREDENTIALS
+# ==================================================
+# Your SASSIE API key (get from SASSIE admin panel)
+SASSIE_API_KEY=your_sassie_api_key_here
+
+# SASSIE API base URL - adjust based on your provider
+# Common options:
+#   - https://api.sassie.com
+#   - https://www.cint.com/survey-api
+#   - Your custom SASSIE endpoint
+SASSIE_API_URL=https://api.sassie.com
+
+# Optional: Account code if you have multiple SASSIE accounts
+SASSIE_ACCOUNT_CODE=RBG001
+
+# ==================================================
+# OPTIONAL: GOOGLE CLOUD (for deployment)
+# ==================================================
+# GCP_PROJECT_ID=your-gcp-project-id
+# STORAGE_BUCKET=your-storage-bucket

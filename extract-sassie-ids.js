@@ -41,10 +41,13 @@ async function extractSassieIds(successfulUpdatesFile) {
 
         if (metadata.sassieId) {
           sassieData.push({
-            workOrderName: metadata.workOrderName,
             workOrderNumber: metadata.workOrderNumber,
+            workOrderName: metadata.workOrderName,
             sassieId: metadata.sassieId,
             sassieSurveyName: metadata.sassieSurveyName || null,
+            sassieSurveyId: metadata.sassieSurveyId || null,
+            sassieVideoQID: metadata.sassieVideoQID || null,
+            sassieDownloadQID: metadata.sassieDownloadQID || null,
             recordId: values[headers.indexOf("recordId")],
             timestamp: values[headers.indexOf("timestamp")],
           });
